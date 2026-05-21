@@ -62,10 +62,16 @@ export default function AdminDashboard() {
 
     try {
       setActiveStep("upload");
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 300000);
+
       const response = await fetch(`${API}/issue_certificate`, {
         method: "POST",
         body: formData,
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       // Simulate step progression while waiting
       await stepDelay("hash",       800);
