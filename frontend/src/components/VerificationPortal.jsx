@@ -1,7 +1,7 @@
 // frontend/src/components/VerificationPortal.jsx
 import { useState, useRef } from "react";
 
-const API = "http://localhost:5000";
+const API = "https://certiledger-api.onrender.com";
 
 export default function VerificationPortal() {
   const [mode,       setMode]     = useState("file"); // "file" or "hash"

@@ -1,7 +1,7 @@
 // frontend/src/components/AdminDashboard.jsx
 import { useState, useRef } from "react";
 
-const API = "http://localhost:5000";
+const API = "https://certiledger-api.onrender.com";
 
 const STEPS = [
   { id: "upload",     icon: "📄", label: "PDF Upload" },
