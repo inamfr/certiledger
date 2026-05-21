@@ -16,8 +16,7 @@ CONTRACT_ADDRESS  = os.getenv("CONTRACT_ADDRESS")
 # blockchain/artifacts/contracts/Certificates.sol/Certificates.json
 ABI_PATH = os.path.join(
     os.path.dirname(__file__),
-    "..", "blockchain", "artifacts", "contracts",
-    "Certificates.sol", "Certificates.json"
+    "Certificates.json"
 )
 
 def _load_abi():
