@@ -1,6 +1,8 @@
 # backend/app.py
 import os
 import tempfile
+import logging
+logging.basicConfig(level=logging.DEBUG)
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from dotenv import load_dotenv
@@ -97,8 +99,10 @@ def issue_certificate():
 
     except Exception as e:
         import traceback
-        print(traceback.format_exc())
-        return jsonify({"error": str(e)}), 500
+        error_details = traceback.format_exc()
+        print(error_details, flush=True)
+        logging.error(error_details)
+        return jsonify({"error": str(e), "traceback": error_details}), 500
 
     finally:
         # Always clean up the temp file
