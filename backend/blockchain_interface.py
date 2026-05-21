@@ -94,13 +94,14 @@ def issue_certificate_on_chain(name: str, course: str, ipfs_cid: str, pdf_hash_h
     print(f"⏳ Transaction sent. Waiting for confirmation...")
     receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=120)
 
-    status = "success" if receipt.status == 1 else "failed"
-    tx_hash_hex = tx_hash.hex()
+    if receipt.status == 0:
+        raise Exception("Certificate already exists on the blockchain.")
 
-    print(f"✅ Transaction {status}: https://sepolia.etherscan.io/tx/{tx_hash_hex}")
+    tx_hash_hex = tx_hash.hex()
+    print(f"✅ Transaction confirmed: https://sepolia.etherscan.io/tx/{tx_hash_hex}")
     return {
         "tx_hash": tx_hash_hex,
-        "status": status,
+        "status": "success",
         "block_number": receipt.blockNumber,
         "etherscan_url": f"https://sepolia.etherscan.io/tx/{tx_hash_hex}"
     }
