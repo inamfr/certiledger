@@ -1,0 +1,24 @@
+# Environment files - NEVER commit these
+.env
+backend/.env
+blockchain/.env
+
+# Python
+__pycache__/
+*.pyc
+backend/venv/
+
+# Node
+node_modules/
+blockchain/node_modules/
+frontend/node_modules/
+
+# Hardhat
+blockchain/artifacts/
+blockchain/cache/
+
+# React build
+frontend/build/
+
+# Misc
+.DS_Store
