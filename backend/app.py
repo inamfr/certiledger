@@ -175,11 +175,19 @@ def revoke_certificate():
         return jsonify({"error": "'hash' field is required."}), 400
 
     try:
-        result = revoke_certificate_on_chain(pdf_hash)
+        import threading
+        result = {"tx_hash": None}
+
+        def do_revoke():
+            revoke_certificate_on_chain(pdf_hash)
+
+        thread = threading.Thread(target=do_revoke)
+        thread.start()
+
+        # Return immediately with pending status
         return jsonify({
-            "message": "Certificate revoked successfully.",
-            "tx_hash": result["tx_hash"],
-            "etherscan_url": result["etherscan_url"],
+            "message": "Revocation submitted. Check Etherscan in ~30 seconds.",
+            "status": "pending",
         }), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
