@@ -166,7 +166,7 @@ def revoke_certificate_on_chain(pdf_hash_hex: str) -> dict:
 
     signed_txn = w3.eth.account.sign_transaction(txn, private_key=PRIVATE_KEY)
     tx_hash = w3.eth.send_raw_transaction(signed_txn.raw_transaction)
-    receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=120)
+    receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=300)
 
     status = "success" if receipt.status == 1 else "failed"
     tx_hash_hex = tx_hash.hex()
